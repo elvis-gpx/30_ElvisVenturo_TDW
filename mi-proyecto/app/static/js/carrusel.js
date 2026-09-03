@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.getElementById("sliderWrapper");
-    const slides = document.querySelectorAll(".slider-item");
-    const prevBtn = document.getElementById("prevSlideBtn");
-    const nextBtn = document.getElementById("nextSlideBtn");
+    const slidesContainer = document.getElementById("slides");
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const dotsContainer = document.getElementById("dotsContainer");
     const dots = document.querySelectorAll(".dot-btn");
-    const sliderContainer = document.getElementById("custom-slider");
 
     let currentIndex = 0;
     const totalSlides = slides.length;
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateSlider(index) {
         currentIndex = index;
         const offset = -currentIndex * 100;
-        wrapper.style.transform = `translateX(${offset}%)`;
+        slidesContainer.style.transform = `translateX(${offset}%)`;
 
         // Actualizar estados de puntos
         dots.forEach((dot, i) => {
@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Eventos de botones
-    nextBtn.addEventListener("click", () => {
-        nextSlide();
+    prevBtn.addEventListener("click", () => {
+        prevSlide();
         resetTimer();
     });
 
-    prevBtn.addEventListener("click", () => {
-        prevSlide();
+    nextBtn.addEventListener("click", () => {
+        nextSlide();
         resetTimer();
     });
 
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         startTimer();
     }
 
-    sliderContainer.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
-    sliderContainer.addEventListener("mouseleave", () => startTimer());
+    slidesContainer.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
+    slidesContainer.addEventListener("mouseleave", () => startTimer());
 
     // Inicializar
     updateSlider(0);
